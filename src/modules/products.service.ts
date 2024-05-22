@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import { Product } from "./products.interface";
 import { ProductModel } from "./products.model";
 
@@ -10,7 +11,7 @@ const createProductIntoDB = async (product: Product) => {
 //   const result = await ProductModel.find();
 //   return result;
 // };
-const getAllProductsFromDB = async (filters: any = {}) => {
+const getAllProductsFromDB = async (filters = {}) => {
   let query = {};
 
   if (filters.searchTerm) {
@@ -24,7 +25,9 @@ const getAllProductsFromDB = async (filters: any = {}) => {
 };
 const getSingleProductFromDB = async (productId: string) => {
   // const result = await ProductModel.findById(productId);
-  const result = await ProductModel.aggregate([{ $match: { id: productId } }]);
+  const result = await ProductModel.aggregate([
+    { $match: { _id: new mongoose.Types.ObjectId(productId) } },
+  ]);
   return result;
 };
 

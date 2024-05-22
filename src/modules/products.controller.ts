@@ -5,7 +5,7 @@ import ProductValidationSchema from "./product.validation";
 const createProduct = async (req: Request, res: Response) => {
   try {
     const productData = req.body;
-    const zodparsedData: any = ProductValidationSchema.parse(productData);
+    const zodparsedData = ProductValidationSchema.parse(productData);
     // console.log(zodparsedData);
     const result = await ProductServices.createProductIntoDB(zodparsedData);
 
@@ -14,7 +14,7 @@ const createProduct = async (req: Request, res: Response) => {
       message: "Product created successfully",
       data: result,
     });
-  } catch (err: any) {
+  } catch (err) {
     res.status(500).json({
       success: false,
       message: err.message || "Something is gone wrong",
@@ -50,7 +50,7 @@ const getAllProducts = async (req: Request, res: Response) => {
       message: "Products fetched successfully!",
       data: products,
     });
-  } catch (error: any) {
+  } catch (error) {
     res.status(500).json({
       success: false,
       message: "Failed to fetch products",
@@ -76,7 +76,7 @@ const getSingleProduct = async (req: Request, res: Response) => {
       message: "Product retrieved successfully",
       data: result,
     });
-  } catch (err: any) {
+  } catch (err) {
     res.status(500).json({
       success: false,
       message: "Something went wrong",
@@ -103,7 +103,7 @@ const updateProduct = async (req: Request, res: Response) => {
       message: "Product updated successfully",
       data: result,
     });
-  } catch (err: any) {
+  } catch (err) {
     res.status(500).json({
       success: false,
       message: "Something went wrong",
@@ -129,7 +129,7 @@ const deleteProduct = async (req: Request, res: Response) => {
       message: "Product deleted successfully",
       data: result,
     });
-  } catch (err: any) {
+  } catch (err) {
     res.status(500).json({
       success: false,
       message: "Something went wrong",
@@ -171,7 +171,7 @@ const searchProducts = async (req: Request, res: Response) => {
       message: "Products fetched successfully!",
       data: results,
     });
-  } catch (error: any) {
+  } catch (error) {
     res.status(500).json({
       success: false,
       message: "Failed to search products",

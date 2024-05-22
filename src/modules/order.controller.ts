@@ -5,7 +5,7 @@ import OrderValidationSchema from "./order.validation";
 const createOrder = async (req: Request, res: Response) => {
   try {
     const orderData = req.body;
-    const zodparsedData: any = OrderValidationSchema.parse(orderData);
+    const zodparsedData = OrderValidationSchema.parse(orderData);
 
     const newOrder = await OrderServices.createOrder(zodparsedData);
 
@@ -14,7 +14,7 @@ const createOrder = async (req: Request, res: Response) => {
       message: "Order created successfully!",
       data: newOrder,
     });
-  } catch (error: any) {
+  } catch (error) {
     res.status(500).json({
       success: false,
       message: "Failed to create order",
@@ -32,7 +32,7 @@ const getAllOrders = async (req: Request, res: Response) => {
       message: "Orders fetched successfully!",
       data: result,
     });
-  } catch (err: any) {
+  } catch (err) {
     res.status(500).json({
       success: false,
       message: "Something went wrong",
@@ -58,7 +58,7 @@ const getOrdersByEmail = async (req: Request, res: Response) => {
       message: "Orders fetched successfully for user email!",
       data: orders,
     });
-  } catch (error: any) {
+  } catch (error) {
     res.status(500).json({
       success: false,
       message: "Failed to fetch orders",
