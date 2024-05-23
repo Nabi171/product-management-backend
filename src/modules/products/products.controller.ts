@@ -20,7 +20,6 @@ const createProduct = async (req: Request, res: Response) => {
     });
   }
 };
-
 const getAllProducts = async (req: Request, res: Response) => {
   try {
     const { searchTerm } = req.query;
@@ -39,7 +38,6 @@ const getAllProducts = async (req: Request, res: Response) => {
     });
   }
 };
-
 const getSingleProduct = async (req: Request, res: Response) => {
   try {
     const { productId } = req.params;
@@ -63,7 +61,6 @@ const getSingleProduct = async (req: Request, res: Response) => {
     });
   }
 };
-
 const updateProduct = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
@@ -88,7 +85,6 @@ const updateProduct = async (req: Request, res: Response) => {
     });
   }
 };
-
 const deleteProduct = async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
@@ -113,7 +109,6 @@ const deleteProduct = async (req: Request, res: Response) => {
     });
   }
 };
-
 const searchProducts = async (req: Request, res: Response) => {
   try {
     const { searchTerm } = req.query;
