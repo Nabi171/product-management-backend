@@ -7,7 +7,7 @@ const VariantValidationSchema = z.object({
 
 const InventoryValidationSchema = z.object({
   quantity: z.number().positive("Quantity must be a positive number"),
-  inStock: z.boolean().optional(), // Assuming inStock is an optional boolean field
+  inStock: z.boolean().optional(),
 });
 
 const ProductValidationSchema = z.object({

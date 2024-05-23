@@ -1,6 +1,10 @@
-import { OrderModel } from "./order.model";
+// import { OrderModel } from "./orders/order.model";
+// import { Order } from "./orders/order.interface";
+// import { ProductModel } from "./products.model";
+
+import { ProductModel } from "../products/products.model";
 import { Order } from "./order.interface";
-import { ProductModel } from "./products.model";
+import { OrderModel } from "./order.model";
 
 const createOrder = async (orderData: Order): Promise<Order> => {
   try {
@@ -16,7 +20,7 @@ const createOrder = async (orderData: Order): Promise<Order> => {
     product.inventory.inStock = product.inventory.quantity > 0;
     await product.save();
     // Create the order
-    const newOrder: Order = await OrderModel.create(orderData);
+    const newOrder: any = await OrderModel.create(orderData);
     return newOrder;
   } catch (error) {
     throw new Error(`Failed to create order: ${error}`);

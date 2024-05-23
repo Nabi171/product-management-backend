@@ -1,24 +1,22 @@
 import { Request, Response } from "express";
-import { OrderServices } from "./order.service";
 import OrderValidationSchema from "./order.validation";
+import { OrderServices } from "./order.service";
 
 const createOrder = async (req: Request, res: Response) => {
   try {
     const orderData = req.body;
-    const zodparsedData = OrderValidationSchema.parse(orderData);
-
+    const zodparsedData: any = OrderValidationSchema.parse(orderData);
     const newOrder = await OrderServices.createOrder(zodparsedData);
-
     res.status(200).json({
       success: true,
       message: "Order created successfully!",
       data: newOrder,
     });
-  } catch (error) {
+  } catch (error: any) {
     res.status(500).json({
       success: false,
       message: "Failed to create order",
-      error: error,
+      error: error.message,
     });
   }
 };
@@ -26,17 +24,16 @@ const createOrder = async (req: Request, res: Response) => {
 const getAllOrders = async (req: Request, res: Response) => {
   try {
     const result = await OrderServices.getAllOrdersFromDB();
-
     res.status(200).json({
       success: true,
       message: "Orders fetched successfully!",
       data: result,
     });
-  } catch (err) {
+  } catch (err: any) {
     res.status(500).json({
       success: false,
       message: "Something went wrong",
-      error: err.message,
+      error: err.message || err,
     });
   }
 };
@@ -50,15 +47,13 @@ const getOrdersByEmail = async (req: Request, res: Response) => {
         message: "Email query parameter is required",
       });
     }
-
     const orders = await OrderServices.getOrderFromDbByEmail(email as string);
-
     res.status(200).json({
       success: true,
       message: "Orders fetched successfully for user email!",
       data: orders,
     });
-  } catch (error) {
+  } catch (error: any) {
     res.status(500).json({
       success: false,
       message: "Failed to fetch orders",
